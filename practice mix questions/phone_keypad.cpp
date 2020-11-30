@@ -10,6 +10,9 @@ void generate_names(char *ip,char *op,int i,int j){
 		return;
 	}
 	int temp = ip[i]-'0';
+	if(temp==1 or temp==0){
+			generate_names(ip,op,i+1,j);
+	}
 	for(int k=0;keypad[temp][k]!='\0';k++){
 		op[j]=keypad[temp][k];
 		//fill the remaining part
