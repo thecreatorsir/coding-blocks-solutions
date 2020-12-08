@@ -43,7 +43,7 @@ bool nQueen(int board[][10],int i,int n){
 			cout<<endl;
 		}
 		cout<<endl;
-		return false;
+		return true;
 	}
 
 	//recursive case
@@ -54,9 +54,9 @@ bool nQueen(int board[][10],int i,int n){
 			if(baakiRakhPaaye){
 				return true;
 			}
+		}
 			//backtrack
 			board[i][j]=0;
-		}
 	}
 	//idhar ana matlb poori row me nahi rakh paaye
 	return false;

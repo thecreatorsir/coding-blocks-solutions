@@ -38,7 +38,6 @@ bool rat_in_maze(char maze[10][10],int soln[][10],int i,int j,int m,int n,int &c
 	if(rightside || downside)
 	 return true;
 	
-	
 	return false;    
 }
 

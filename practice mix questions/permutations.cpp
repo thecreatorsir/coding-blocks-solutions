@@ -20,7 +20,6 @@ void permutations(char *ip,int i){
 
 int main(){
 	char ip[10] = "abc";
-	char op[10];
 	permutations(ip,0);
 	return 0;
 }

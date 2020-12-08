@@ -7,7 +7,6 @@ void solve(int board[][10],int n,int i,int &ans){
 	//base case
 	if(i==n){
 		ans++;
-		cout<<"test"<<endl;
 		//print board
 		for(int k=0;k<n;k++){
 			for(int l=0;l<n;l++){
