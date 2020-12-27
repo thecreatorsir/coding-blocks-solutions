@@ -1,60 +1,60 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-string match_pattern(string s,string pat){
-    int PL = pat.length();
-    int SL = s.length();
-    //corner case
-    if(PL > SL){
-        return "None";
-    }
-    char FS[256] = {0};
-    char FP[256] = {0};
-    int cnt = 0;
-    int start = 0;
-    int min_window = INT_MAX;
-    int start_index = -1;
-    //hashing 
-    for(int i=0;i<PL;i++){
-        char ch = pat[i];
-        FP[ch]++;
-    }
-    //iterating over the input string
-    for(int i=0;i<SL;i++){
-        char ch = s[i];
-        FS[ch]++;
+string sub_string(string s,string p){
+	int pl = p.length();
+	int sl = s.length();
+	if(pl>sl){
+		return "No String";
+	}
+	//hash the pattern string
+	int fp[256] = {0};
+	int fs[256] = {0};
+	
+	for(int i=0;i<pl;i++){
+		char ch = p[i];
+		fp[ch]++;
+	}
+	int count = 0;
+	int start = 0;
+	int start_ind = -1;
+	int min_win = INT_MAX;
+	for(int i=0;i<sl;i++){
+		char ch = s[i];
+		fs[ch]++;
+		if(fp[ch]!=0 and fs[ch]<=fp[ch]){
+			count++;
+		}
 
-        //maintaining the count of the char matched
-        if(FP[ch]!=0 and FS[ch]<=FP[ch]){
-            cnt++;
-        }
-         
-        if(cnt == PL){
-            //start shrinking the window
-            char temp = s[start];
-            //if not present or present more the required the remove it
-            while(FP[temp]==0 or FS[temp]>FP[temp]){
-                FS[temp]--;
-                start = start + 1;
-                temp = s[start];
-            }
-            //after this loop i will get my widow
-            int window_size = i - start + 1;
-            if(window_size < min_window){
-                min_window = window_size;
-                start_index = start;
-            }
-        } 
-    }
-    if(start_index == -1){
-        return "None";
-    }
-    string ans = s.substr(start_index,min_window);
-    return ans;
+		if(count==pl){
+			//shrink from front
+			char temp;
+			temp  = s[start];
+			while(fp[temp]==0 or fs[temp]>fp[temp]){
+				    fs[temp]--;
+				start++;
+				temp = s[start];
+			}
+
+			int window = i-start + 1;
+			if(window < min_win){
+				min_win = window;
+				start_ind = start;
+			}
+		}
+
+	}
+	if(start_ind == -1){
+		return "No String";
+	}
+	return s.substr(start_ind,min_win);
 }
 
+
 int main() {
-    string s("helloelo");
-    string p("elo");
-    cout<<match_pattern(s,p);
+	string s,p;
+    getline(cin,s); 
+	getline(cin,p); 
+	cout<<sub_string(s,p);
+	return 0;
 }
